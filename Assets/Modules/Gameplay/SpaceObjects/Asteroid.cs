@@ -1,8 +1,8 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using Asteroids.Modules.Gameplay;
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "Asteroid", menuName = "SpaceObjects/Asteroid")]
 public class Asteroid : SpaceObject
 {
     public int pointsOnBulletHit;
@@ -15,16 +15,16 @@ public class Asteroid : SpaceObject
     private float _speed;
     private float _rotationSpeed;
     
-    public override void OnCreate(Transform t)
+    public override void OnCreate()
     {
-        var position = t.position;
+        var position = transform.position;
         
-        _direction = Random.insideUnitCircle.normalized; //GetRandomPositionInsidePlayArea
+        _direction = World.GetRandomVectorInPlayArea() - (Vector2)position; //GetRandomPositionInsidePlayArea
         _speed = Random.Range(minSpeed, maxSpeed);
         _rotationSpeed = Random.Range(minRotationSpeed, maxRotationSpeed);
     }
 
-    public override void OnTransform(Transform t)
+    public override void OnTransform()
     {
         throw new System.NotImplementedException();
     }

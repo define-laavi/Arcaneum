@@ -27,7 +27,7 @@ public class Effects : MonoBehaviour
     static IEnumerator FreezeFrameEnumerator()
     {
         Time.timeScale = 0;
-        yield return new WaitForSecondsRealtime(0.01f);
+        yield return new WaitForSecondsRealtime(0.05f);
         Time.timeScale = 1;
     }
 }
