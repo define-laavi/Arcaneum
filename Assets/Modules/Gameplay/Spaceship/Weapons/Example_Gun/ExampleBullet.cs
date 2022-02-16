@@ -18,7 +18,22 @@ public class ExampleBullet : SpaceshipBulletBehaviour
 
     protected override void OnHit(Collision2D col)
     {
-        Effects.FreezeFrame();
+
+
+        if (col.gameObject.CompareTag("Asteroid"))
+        {
+            Destroy();
+            Effects.FreezeFrame();
+        }
+        else if (_exittedPlayer && col.gameObject.CompareTag("Player"))
+        {
+            Destroy();
+            Effects.FreezeFrame();
+        }
+    }
+
+    protected override void Destroy()
+    {
         var p = Instantiate(onHitParticle);
         p.transform.position = transform.position;
         Destroy(p, 0.7f);

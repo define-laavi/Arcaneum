@@ -29,11 +29,13 @@ public class SpaceshipController : MonoBehaviour
     private Vector3 _speed;
     private float _angularSpeed;
 
-    private Vector3 _position = Vector3.zero;
-    private Quaternion _orientation = quaternion.identity;
+    private Vector3 _position;
+    private Quaternion _orientation;
 
     private ShipThrusterBehaviour _shipThrusterBehaviour;
     private ShipTrailBehaviour _shipTrailBehaviour;
+
+    public GameObject AsteroidTempBig;
     
     private void OnValidate()
     {
@@ -47,11 +49,19 @@ public class SpaceshipController : MonoBehaviour
 
     private void Start()
     {
-        _shipThrusterBehaviour = GetComponent<ShipThrusterBehaviour>();
-        _shipTrailBehaviour = GetComponent<ShipTrailBehaviour>();
+        _position = Vector3.zero;
+        _orientation = quaternion.identity;
         
+        _shipThrusterBehaviour = GetComponent<ShipThrusterBehaviour>();
+        if(_shipThrusterBehaviour == null)
+            Debug.LogWarning("Spaceship has no thruster behaviour attached, is this intentional?");
+        
+        _shipTrailBehaviour = GetComponent<ShipTrailBehaviour>();
+        if(_shipTrailBehaviour == null)
+            Debug.LogWarning("Spaceship has no trail behaviour attached, is this intentional?");
+
         if(spaceshipGunBehaviour == null)
-            Debug.LogWarning("Spaceship has no gun controller, is this intentional?");
+            Debug.LogWarning("Spaceship has no gun behaviour referenced, is this intentional?");
     }
 
     private void Update()
@@ -72,6 +82,12 @@ public class SpaceshipController : MonoBehaviour
         transform.rotation = _orientation;
 
         HandleGun();
+
+        if (Input.GetKeyDown(KeyCode.Q))
+        {
+            var a = Instantiate(AsteroidTempBig);
+            a.transform.position = World.GetRandomVectorOutsideOfPlayArea();
+        }
     }
    
     private void UpdateLinear()

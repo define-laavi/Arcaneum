@@ -62,13 +62,39 @@ namespace Asteroids.Modules.Gameplay
 
         public static Vector2 GetRandomVectorInPlayArea()
         {
-            const float accuracy = 0.8f; //makes it impossible to get a point on the edge
+            const float insideScalar = 0.8f; //makes it impossible to get a point on the edge
             
             return new Vector2(Random.Range(_gameWorldMinimum.x, _gameWorldMaximum.x),
-                Random.Range(_gameWorldMinimum.y, _gameWorldMaximum.y))*accuracy;
+                Random.Range(_gameWorldMinimum.y, _gameWorldMaximum.y)) * insideScalar;
         }
 
-        public static void CreateSpaceObject(SpaceObject definition)
+        public static Vector2 GetRandomVectorOutsideOfPlayArea()
+        {
+            const float width = 1f; //width of the outside "donut"
+            const float outsideScalar = 1.1f; //makes sure the object will spawn outside of the play area - not on the edge
+            
+            var area = Random.Range(0, 4); // select on which side the vector is
+            
+            switch (area)
+            {
+                case 0: //Left
+                    return new Vector2(Random.Range(_gameWorldMinimum.x - width, _gameWorldMinimum.x),
+                        Random.Range(_gameWorldMinimum.y - width, _gameWorldMaximum.y + width)) * outsideScalar;
+                case 1: //Top
+                    return new Vector2(Random.Range(_gameWorldMinimum.x, _gameWorldMaximum.x), 
+                        Random.Range(_gameWorldMaximum.y, _gameWorldMaximum.y + width)) * outsideScalar;
+                case 2: //Right
+                    return new Vector2(Random.Range(_gameWorldMaximum.x, _gameWorldMaximum.x + width),
+                        Random.Range(_gameWorldMinimum.y - width, _gameWorldMaximum.y + width)) * outsideScalar;
+                case 3: //Bottom
+                    return new Vector2(Random.Range(_gameWorldMinimum.x, _gameWorldMaximum.x),
+                        Random.Range(_gameWorldMinimum.y - width, _gameWorldMinimum.y)) * outsideScalar;
+            }
+
+            return Vector2.zero;
+        }
+
+        public static void CreateSpaceObject(SpaceObjectBehaviour definition)
         {
             
         }

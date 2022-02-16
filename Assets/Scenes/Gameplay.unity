@@ -1014,7 +1014,7 @@ GameObject:
   - component: {fileID: 961746664}
   - component: {fileID: 961746663}
   m_Layer: 0
-  m_Name: EventSystem
+  m_Name: Event System
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1450,8 +1450,9 @@ GameObject:
   - component: {fileID: 1410591837}
   - component: {fileID: 1410591836}
   - component: {fileID: 1410591838}
+  - component: {fileID: 1410591839}
   m_Layer: 0
-  m_Name: PostProcessing
+  m_Name: Post Processing
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1502,6 +1503,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   material: {fileID: 2100000, guid: a827670e669f7094b9f3c3c76b16d4ff, type: 2}
   speed: -1
+--- !u!114 &1410591839
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1410591835}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d1ac11ca3e9a00e4182db543afd1fc38, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1423674811
 GameObject:
   m_ObjectHideFlags: 0
@@ -1512,7 +1525,6 @@ GameObject:
   m_Component:
   - component: {fileID: 1423674813}
   - component: {fileID: 1423674812}
-  - component: {fileID: 1423674814}
   m_Layer: 0
   m_Name: World
   m_TagString: Untagged
@@ -1547,18 +1559,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1423674814
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1423674811}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d1ac11ca3e9a00e4182db543afd1fc38, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &1591177572
 GameObject:
   m_ObjectHideFlags: 0
@@ -2214,6 +2214,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 632950440051124238, guid: c304251d4ca123049b7c05d45c09f0db, type: 3}
+      propertyPath: reloadTime
+      value: 0.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 6980822058085015664, guid: c304251d4ca123049b7c05d45c09f0db, type: 3}
+      propertyPath: AsteroidTempBig
+      value: 
+      objectReference: {fileID: 806426812279035667, guid: db8b0944a37098d46ad0271435c77b13, type: 3}
     - target: {fileID: 6980822058085015666, guid: c304251d4ca123049b7c05d45c09f0db, type: 3}
       propertyPath: m_RootOrder
       value: 4
