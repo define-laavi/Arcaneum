@@ -117,7 +117,7 @@ MonoBehaviour:
     showEyeDropper: 1
   hueShift:
     m_OverrideState: 1
-    m_Value: 91
+    m_Value: 136
     min: -180
     max: 180
   saturation:

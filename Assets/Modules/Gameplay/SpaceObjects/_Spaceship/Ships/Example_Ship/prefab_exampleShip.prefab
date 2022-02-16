@@ -43,8 +43,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1da1ec0c0f0ad624eab78641b6050581, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  reloadTime: 2
+  reloadTime: 0.2
   bulletPrefab: {fileID: 2021608020948621702, guid: 3ebdb82334aa2304886ac927118f2cea, type: 3}
+  recoil: 100
 --- !u!1 &3963487750136569523
 GameObject:
   m_ObjectHideFlags: 0
@@ -640,13 +641,14 @@ MonoBehaviour:
   backwardForce: 4
   maxLinearSpeed: 5
   linearStopTime: 5
-  angularForce: 5
-  maxAngularSpeed: 180
+  angularForce: 360
+  maxAngularSpeed: 360
   angularStopTime: 2
   spaceshipActions:
   - name: Shoot
     behaviour: {fileID: 632950440051124238}
     key: 32
+  playerDeathParticle: {fileID: 4869876614262015668, guid: 96e637790d767554a8a22f9bf75bc872, type: 3}
 --- !u!114 &6980822058085015676
 MonoBehaviour:
   m_ObjectHideFlags: 0

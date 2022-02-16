@@ -150,6 +150,7 @@ MonoBehaviour:
   - {fileID: -5313133842196298153, guid: 441f8a98fd2d00646a07a04a37ac4398, type: 3}
   - {fileID: 7044188260686333978, guid: 4d000ce97194e624998c59f17ef862eb, type: 3}
   numberOfAsteroidsToSpawn: 2
+  destructionParticleSystem: {fileID: 402226269389844360, guid: 1f975dffc2bd8c046ab799bf26ea6aea, type: 3}
 --- !u!1 &7285511433393550841
 GameObject:
   m_ObjectHideFlags: 0

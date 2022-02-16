@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SkyboxController : MonoBehaviour
+public class SkyboxBehaviour : MonoBehaviour
 {
     public Material material;
 

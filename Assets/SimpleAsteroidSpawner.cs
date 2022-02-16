@@ -6,26 +6,38 @@ using UnityEngine;
 [DisallowMultipleComponent]
 public class SimpleAsteroidSpawner : MonoBehaviour
 {
+    private static SimpleAsteroidSpawner _instance;
+
     [SerializeField] private List<Asteroid> _asteroidVariants;
     [Min(0.1f), SerializeField] private float _secondsPerAsteroid;
     [Min(0.1f), SerializeField] private float _secondsToStartSpawning;
 
-    public void Restart()
+    public static void Run()
     {
-        Stop();
-        StartCoroutine(AwaitStart());
+        if (_instance == null)
+            throw new System.Exception("There is no simple asteroid spawner instance!");
+
+        _instance.StartCoroutine(_instance.AwaitStart());
     }
-    public void Stop()
+    public static void Stop()
     {
-        StopAllCoroutines();
+        if (_instance == null)
+            throw new System.Exception("There is no simple asteroid spawner instance!");
+
+        _instance.StopAllCoroutines();
     }
 
     private void Start()
     {
+        if (_instance != null)
+            Destroy(this);
+
+        _instance = this;
+
         if (_asteroidVariants.Count == 0)
             throw new System.Exception("No asteroid variants added to the spawner!");
 
-        Restart();
+        Run();
     }
     
     private IEnumerator AwaitStart()
@@ -35,7 +47,7 @@ public class SimpleAsteroidSpawner : MonoBehaviour
     }
     private IEnumerator SpawnAsteroid()
     {
-        var a = Instantiate(_asteroidVariants[Random.Range(0, _asteroidVariants.Count)]);
+        var a = Pool.Spawn(_asteroidVariants[Random.Range(0, _asteroidVariants.Count)].gameObject);
         a.transform.position = World.GetRandomVectorOutsideOfPlayArea();
 
         yield return new WaitForSecondsRealtime(_secondsPerAsteroid);

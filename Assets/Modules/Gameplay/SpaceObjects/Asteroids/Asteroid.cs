@@ -17,6 +17,7 @@ public class Asteroid : SpaceObjectBehaviour
     [Header("Split")]
     public List<Asteroid> asteroidPrefabsToSpawn;
     public int numberOfAsteroidsToSpawn;
+    public ParticleSystem destructionParticleSystem;
     
     private Vector2 _direction;
     private float _speed;
@@ -49,10 +50,11 @@ public class Asteroid : SpaceObjectBehaviour
 
     protected override void OnHit(Collision2D col, SpaceObjectBehaviour spaceObjectBehaviour)
     {
-        if (spaceObjectBehaviour.GetType().IsSubclassOf(typeof(SpaceshipBulletBehaviour))) //if we hit any type of bullet
+        if (spaceObjectBehaviour.GetType().IsSubclassOf(typeof(BulletBehaviour))) //if we hit any type of bullet
         {
             Split();
-            OnDestroy();
+            OnDeath();
+            Score.AddScore(pointsOnBulletHit);
         }
     }
     private void Split()
@@ -62,13 +64,17 @@ public class Asteroid : SpaceObjectBehaviour
         
         for (var i = 0; i < numberOfAsteroidsToSpawn; i++)
         {
-            var asteroid = Instantiate(asteroidPrefabsToSpawn[Random.Range(0, asteroidPrefabsToSpawn.Count)].gameObject);
+            var asteroid = Pool.Spawn(asteroidPrefabsToSpawn[Random.Range(0, asteroidPrefabsToSpawn.Count)].gameObject);
             asteroid.transform.position = transform.position;
         }
     }
 
-    public override void OnDestroy()
+    public override void OnDeath()
     {
-        base.OnDestroy();
+        var a = Pool.Spawn(destructionParticleSystem.gameObject);
+        a.transform.position = transform.position;
+        Pool.Despawn(a, a.GetComponent<ParticleSystem>().main.startLifetime.constantMax);
+
+        base.OnDeath();
     }
 }

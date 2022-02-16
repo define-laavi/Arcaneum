@@ -21,6 +21,7 @@ public class Spaceship : SpaceObjectBehaviour
 
     [Header("Other")]
     public List<SpaceshipAction> spaceshipActions;
+    public ParticleSystem playerDeathParticle;
 
     private Vector2 _input;
     private Vector3 _speed;
@@ -100,21 +101,27 @@ public class Spaceship : SpaceObjectBehaviour
         {
             if (Input.GetKeyDown(action.key))
                 action.behaviour?.Act(this);
-            
         }
     }
 
     protected override void OnHit(Collision2D col, SpaceObjectBehaviour spaceObjectBehaviour)
     {
-        if(spaceObjectBehaviour.GetType() == typeof(SpaceshipBulletBehaviour))
+        if (spaceObjectBehaviour is BulletBehaviour)
         {
-            OnDestroy();
+
+            if ((spaceObjectBehaviour as BulletBehaviour).CanHitPlayer)
+                OnDeath();
+        }
+        else if(spaceObjectBehaviour is Asteroid)
+        {
+            OnDeath();
         }
     }
 
-    public override void OnDestroy()
+    public override void OnDeath()
     {
-        base.OnDestroy();
+        Gameplay.OnPlayerDeath(transform.position);
+        base.OnDeath();
     }
 
     public void ApplyLinearForce(Vector2 force)
@@ -124,6 +131,4 @@ public class Spaceship : SpaceObjectBehaviour
         if (_speed.sqrMagnitude > maxLinearSpeed * maxLinearSpeed)
             _speed = _speed.normalized * maxLinearSpeed;
     }
-
-
 }

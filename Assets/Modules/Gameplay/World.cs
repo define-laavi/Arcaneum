@@ -60,6 +60,16 @@ namespace Asteroids.Modules.Gameplay
             return new Vector2((shifted.x % Width + Width) % Width, (shifted.y % Height + Height) % Height) + _gameWorldMinimum;
         }
 
+        public static Vector2 LoopInPlayArea(Vector2 point, Vector2 size)
+        {
+            var shifted = point - (_gameWorldMinimum - size / 2f);
+
+            var sizeWidth = Width + size.x;
+            var sizeHeight = Height + size.y;
+
+            return new Vector2((shifted.x % sizeWidth + sizeWidth) % sizeWidth, (shifted.y % sizeHeight + sizeHeight) % sizeHeight) + (_gameWorldMinimum - size /2f);
+        }
+
         public static Vector2 GetRandomVectorInPlayArea()
         {
             const float insideScalar = 0.8f; //makes it impossible to get a point on the edge

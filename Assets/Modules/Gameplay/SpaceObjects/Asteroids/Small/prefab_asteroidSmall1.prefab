@@ -138,6 +138,7 @@ MonoBehaviour:
   maxRotationSpeed: 5
   asteroidPrefabsToSpawn: []
   numberOfAsteroidsToSpawn: 0
+  destructionParticleSystem: {fileID: 2238316776790833580, guid: 04ae7fea20196744ea8bf4edf31f0229, type: 3}
 --- !u!1 &4555198652148947720
 GameObject:
   m_ObjectHideFlags: 0

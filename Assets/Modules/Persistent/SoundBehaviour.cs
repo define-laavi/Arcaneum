@@ -2,9 +2,9 @@
 using System.Linq;
 using UnityEngine;
 
-public class Sound : MonoBehaviour
+public class SoundBehaviour : MonoBehaviour
 {
-    private static Sound _instance;
+    private static SoundBehaviour _instance;
     public List<SoundClip> sounds;
 
     // Start is called before the first frame update

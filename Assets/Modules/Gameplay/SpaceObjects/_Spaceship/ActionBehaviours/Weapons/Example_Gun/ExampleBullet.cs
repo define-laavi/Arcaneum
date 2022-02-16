@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using Asteroids.Modules.Gameplay;
 using UnityEngine;
 
-public class ExampleBullet : SpaceshipBulletBehaviour
+public class ExampleBullet : BulletBehaviour
 {
     public float speed;
     public GameObject onHitParticle;
@@ -20,21 +20,21 @@ public class ExampleBullet : SpaceshipBulletBehaviour
         //We want bullets to destroy on player only after it went outside of the barrel and on anything else right after the shot.
         if (spaceObjectBehaviour.GetType() == typeof(Spaceship))
         {
-            if (_leftPlayer)
+            if (CanHitPlayer)
             {
-                OnDestroy();
+                OnDeath();
             }
         }
         else
         {
-            OnDestroy();
+            OnDeath();
         }
     }
-    public override void OnDestroy()
+    public override void OnDeath()
     {
-        var p = Instantiate(onHitParticle);
+        var p = Pool.Spawn(onHitParticle);
         p.transform.position = transform.position;
-        Destroy(p, 0.7f);
-        Destroy(this.gameObject);
+        Pool.Despawn(p, 0.7f);
+        Pool.Despawn(this.gameObject);
     }
 }
