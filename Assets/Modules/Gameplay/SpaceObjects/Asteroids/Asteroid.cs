@@ -1,5 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using Asteroids.Modules.Gameplay;
 using Unity.Mathematics;
 using UnityEngine;
@@ -7,28 +6,32 @@ using Random = UnityEngine.Random;
 
 public class Asteroid : SpaceObjectBehaviour
 {
+    [Header("General")]
     public int pointsOnBulletHit;
+
+    [Header("Movement")]
+    public float minSpeed;
+    public float maxSpeed;
+    public float minRotationSpeed, maxRotationSpeed;
+
+    [Header("Split")]
     public List<Asteroid> asteroidPrefabsToSpawn;
     public int numberOfAsteroidsToSpawn;
-    
-    public float minSpeed, maxSpeed;
-    public float minRotationSpeed, maxRotationSpeed;
     
     private Vector2 _direction;
     private float _speed;
     private float _rotationSpeed;
-
     private bool _wasInGameArea = false;
     
-    protected override void OnCreate()
+    protected override void OnEnabled()
     {
         _wasInGameArea = false;
-        _direction = World.GetRandomVectorInPlayArea() - (Vector2)transform.position; //GetRandomPositionInsidePlayArea
+        _direction = (World.GetRandomVectorInPlayArea() - (Vector2)transform.position).normalized; //GetRandomPositionInsidePlayArea
         _speed = Random.Range(minSpeed, maxSpeed);
         _rotationSpeed = Random.Range(minRotationSpeed, maxRotationSpeed);
     }
-
-    protected override void Move()
+    
+    protected override void OnUpdate()
     {
         var position = transform.position;
         
@@ -44,16 +47,15 @@ public class Asteroid : SpaceObjectBehaviour
         transform.rotation *= quaternion.Euler(0,0,_rotationSpeed*Time.deltaTime);
     }
 
-    protected override void OnHit(Collision2D col)
+    protected override void OnHit(Collision2D col, SpaceObjectBehaviour spaceObjectBehaviour)
     {
-        if (col.gameObject.CompareTag("Bullet"))
+        if (spaceObjectBehaviour.GetType().IsSubclassOf(typeof(SpaceshipBulletBehaviour))) //if we hit any type of bullet
         {
             Split();
-            Destroy();
+            OnDestroy();
         }
     }
-
-    void Split()
+    private void Split()
     {
         if (asteroidPrefabsToSpawn.Count == 0 || numberOfAsteroidsToSpawn <= 0)
             return;
@@ -65,8 +67,8 @@ public class Asteroid : SpaceObjectBehaviour
         }
     }
 
-    protected override void Destroy()
+    public override void OnDestroy()
     {
-        base.Destroy();
+        base.OnDestroy();
     }
 }

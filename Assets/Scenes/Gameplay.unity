@@ -1525,6 +1525,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1423674813}
   - component: {fileID: 1423674812}
+  - component: {fileID: 1423674814}
   m_Layer: 0
   m_Name: World
   m_TagString: Untagged
@@ -1559,6 +1560,30 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1423674814
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1423674811}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 655b2b5f843c2b64d975bead68723ef1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _asteroidVariants:
+  - {fileID: 2950841884876512608, guid: db8b0944a37098d46ad0271435c77b13, type: 3}
+  - {fileID: -4435518658879649537, guid: 0ec7737bf28a1b84fbb90b9365573170, type: 3}
+  - {fileID: 7925028348645318025, guid: e2fba5c462cdbec4fa40db440b178256, type: 3}
+  - {fileID: -825486874572503892, guid: 3637fc02632466041b2d62755657dc31, type: 3}
+  - {fileID: -6071194152533536731, guid: f3344ab57f928b040b10d110652807bb, type: 3}
+  - {fileID: -5313133842196298153, guid: 441f8a98fd2d00646a07a04a37ac4398, type: 3}
+  - {fileID: 7044188260686333978, guid: 4d000ce97194e624998c59f17ef862eb, type: 3}
+  - {fileID: -982769989193248942, guid: 2e8e472bf5a028e4e88eeb2afa73470e, type: 3}
+  - {fileID: 4559644054710556322, guid: 0892ee4b55fd51b40bacafaf6a3ab977, type: 3}
+  _secondsPerAsteroid: 1
+  _secondsToStartSpawning: 3
 --- !u!1 &1591177572
 GameObject:
   m_ObjectHideFlags: 0
@@ -2222,6 +2247,26 @@ PrefabInstance:
       propertyPath: AsteroidTempBig
       value: 
       objectReference: {fileID: 806426812279035667, guid: db8b0944a37098d46ad0271435c77b13, type: 3}
+    - target: {fileID: 6980822058085015664, guid: c304251d4ca123049b7c05d45c09f0db, type: 3}
+      propertyPath: AsteroidTempBig.Array.size
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 6980822058085015664, guid: c304251d4ca123049b7c05d45c09f0db, type: 3}
+      propertyPath: AsteroidTempBig.Array.data[0]
+      value: 
+      objectReference: {fileID: 806426812279035667, guid: db8b0944a37098d46ad0271435c77b13, type: 3}
+    - target: {fileID: 6980822058085015664, guid: c304251d4ca123049b7c05d45c09f0db, type: 3}
+      propertyPath: AsteroidTempBig.Array.data[1]
+      value: 
+      objectReference: {fileID: 2715870526050210705, guid: 0ec7737bf28a1b84fbb90b9365573170, type: 3}
+    - target: {fileID: 6980822058085015664, guid: c304251d4ca123049b7c05d45c09f0db, type: 3}
+      propertyPath: AsteroidTempBig.Array.data[2]
+      value: 
+      objectReference: {fileID: 731352637099767464, guid: e2fba5c462cdbec4fa40db440b178256, type: 3}
+    - target: {fileID: 6980822058085015664, guid: c304251d4ca123049b7c05d45c09f0db, type: 3}
+      propertyPath: AsteroidTempBig.Array.data[3]
+      value: 
+      objectReference: {fileID: 1970736228954635544, guid: 3637fc02632466041b2d62755657dc31, type: 3}
     - target: {fileID: 6980822058085015666, guid: c304251d4ca123049b7c05d45c09f0db, type: 3}
       propertyPath: m_RootOrder
       value: 4
@@ -2269,6 +2314,14 @@ PrefabInstance:
     - target: {fileID: 6980822058085015670, guid: c304251d4ca123049b7c05d45c09f0db, type: 3}
       propertyPath: m_Name
       value: Example_Ship
+      objectReference: {fileID: 0}
+    - target: {fileID: 8191006347781421537, guid: c304251d4ca123049b7c05d45c09f0db, type: 3}
+      propertyPath: angularForce
+      value: 360
+      objectReference: {fileID: 0}
+    - target: {fileID: 8191006347781421537, guid: c304251d4ca123049b7c05d45c09f0db, type: 3}
+      propertyPath: maxAngularSpeed
+      value: 360
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c304251d4ca123049b7c05d45c09f0db, type: 3}

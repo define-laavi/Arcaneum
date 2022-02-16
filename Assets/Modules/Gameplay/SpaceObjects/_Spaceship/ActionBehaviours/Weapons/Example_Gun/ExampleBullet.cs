@@ -8,31 +8,29 @@ public class ExampleBullet : SpaceshipBulletBehaviour
     public float speed;
     public GameObject onHitParticle;
     
-    protected override void Move()
+    protected override void OnUpdate()
     {
         var position = transform.position;
         position += speed * transform.up * Time.deltaTime;
         position = World.LoopInPlayArea(position);
         transform.position = position;
     }
-
-    protected override void OnHit(Collision2D col)
+    protected override void OnHit(Collision2D col, SpaceObjectBehaviour spaceObjectBehaviour)
     {
-
-
-        if (col.gameObject.CompareTag("Asteroid"))
+        //We want bullets to destroy on player only after it went outside of the barrel and on anything else right after the shot.
+        if (spaceObjectBehaviour.GetType() == typeof(Spaceship))
         {
-            Destroy();
-            Effects.FreezeFrame();
+            if (_leftPlayer)
+            {
+                OnDestroy();
+            }
         }
-        else if (_exittedPlayer && col.gameObject.CompareTag("Player"))
+        else
         {
-            Destroy();
-            Effects.FreezeFrame();
+            OnDestroy();
         }
     }
-
-    protected override void Destroy()
+    public override void OnDestroy()
     {
         var p = Instantiate(onHitParticle);
         p.transform.position = transform.position;

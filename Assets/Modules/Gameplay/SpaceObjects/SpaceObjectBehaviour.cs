@@ -1,28 +1,25 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
+[RequireComponent(typeof(Rigidbody2D)), DisallowMultipleComponent]
 public abstract class SpaceObjectBehaviour : MonoBehaviour
 {
-    private void Start()
-    {
-        OnCreate();
-    }
+    public string spaceObjectTag;
+
+    private void Start(){ OnStart(); OnEnabled(); }
+    private void OnEnable(){OnEnabled();}
     private void Update()
     {
-        Tick();
-        Move();
+        OnUpdate();
     }
     private void OnCollisionEnter2D(Collision2D col)
     {
-        OnHit(col);
+        if(col.gameObject.TryGetComponent<SpaceObjectBehaviour>(out var spaceObjectBehaviour))
+            OnHit(col, spaceObjectBehaviour);
     }
 
-    protected virtual void OnCreate(){}
-    protected virtual void Tick(){}
-    protected virtual void Move(){}
-    protected virtual void OnHit(Collision2D col){}
-    
-    protected virtual void Destroy(){Destroy(this.gameObject);}
+    protected virtual void OnStart() {}
+    protected virtual void OnEnabled(){}
+    protected virtual void OnUpdate(){}
+    protected virtual void OnHit(Collision2D col, SpaceObjectBehaviour colBehaviour){}
+    public virtual void OnDestroy(){Destroy(this.gameObject);}
 }

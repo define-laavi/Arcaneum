@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: -6071194152533536731}
   m_Layer: 0
   m_Name: prefab_asteroidMedium1
-  m_TagString: Untagged
+  m_TagString: Asteroid
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -132,15 +132,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 42372fdca4f7df043863d815bbf9b43b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  spaceObjectTag: 
   pointsOnBulletHit: 10
+  minSpeed: 0.4
+  maxSpeed: 3
+  minRotationSpeed: -5
+  maxRotationSpeed: 5
   asteroidPrefabsToSpawn:
   - {fileID: -982769989193248942, guid: 2e8e472bf5a028e4e88eeb2afa73470e, type: 3}
   - {fileID: 4559644054710556322, guid: 0892ee4b55fd51b40bacafaf6a3ab977, type: 3}
   numberOfAsteroidsToSpawn: 2
-  minSpeed: 0.1
-  maxSpeed: 0.3
-  minRotationSpeed: -5
-  maxRotationSpeed: 5
 --- !u!1 &8519022867968709194
 GameObject:
   m_ObjectHideFlags: 0

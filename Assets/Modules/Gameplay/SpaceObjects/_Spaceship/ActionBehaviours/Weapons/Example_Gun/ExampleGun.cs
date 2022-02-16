@@ -2,14 +2,14 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ExampleGun : SpaceshipGunBehaviour
+public class ExampleGun : SpaceshipActionBehaviour
 {
     public float reloadTime = 2;
     public GameObject bulletPrefab;
     
     private bool _canShoot = true;
     
-    public override void Shoot(SpaceshipController spaceship)
+    public override void Act(Spaceship spaceship)
     {
         if (!_canShoot) return;
 
