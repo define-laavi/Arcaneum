@@ -132,17 +132,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 42372fdca4f7df043863d815bbf9b43b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  spaceObjectTag: 
-  pointsOnBulletHit: {fileID: 11400000, guid: 1fce89a19bd519544bc6cbfae8ed846e, type: 2}
-  minSpeed: 0.4
-  maxSpeed: 3
-  minRotationSpeed: -5
-  maxRotationSpeed: 5
-  asteroidPrefabsToSpawn:
+  _pointsOnBulletHit: {fileID: 11400000, guid: 1fce89a19bd519544bc6cbfae8ed846e, type: 2}
+  _minSpeed: 0.6
+  _maxSpeed: 1.2
+  _minRotationSpeed: -5
+  _maxRotationSpeed: 5
+  _asteroidPrefabsToSpawn:
   - {fileID: -982769989193248942, guid: 2e8e472bf5a028e4e88eeb2afa73470e, type: 3}
   - {fileID: 4559644054710556322, guid: 0892ee4b55fd51b40bacafaf6a3ab977, type: 3}
-  numberOfAsteroidsToSpawn: 2
-  destructionParticleSystem: {fileID: 943375811239579337, guid: 8367a4dada6784c4f95e626d42606479, type: 3}
+  _numberOfAsteroidsToSpawn: 2
+  _destructionParticleSystem: {fileID: 943375811239579337, guid: 8367a4dada6784c4f95e626d42606479, type: 3}
   _onDeathSound: {fileID: 8300000, guid: 160a422517c8c124588621d9410a1c3a, type: 3}
 --- !u!1 &8519022867968709194
 GameObject:

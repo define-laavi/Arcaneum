@@ -3483,7 +3483,7 @@ MonoBehaviour:
   m_CaretColor: {r: 0.19607843, g: 0.19607843, b: 0.19607843, a: 1}
   m_CustomCaretColor: 0
   m_SelectionColor: {r: 0.65882355, g: 0.80784315, b: 1, a: 0.7529412}
-  m_Text: <INITIALS>
+  m_Text: INITIALS
   m_CaretBlinkRate: 0.85
   m_CaretWidth: 1
   m_ReadOnly: 0
@@ -4746,7 +4746,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "<INITIALS>\u200B"
+  m_text: "INITIALS\u200B"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -5243,7 +5243,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _secondsPerAsteroid: 0.5
-  _secondsToStartSpawning: 3
+  _secondsToStartSpawning: 1
   _asteroidVariants:
   - {fileID: 2950841884876512608, guid: db8b0944a37098d46ad0271435c77b13, type: 3}
   - {fileID: -4435518658879649537, guid: 0ec7737bf28a1b84fbb90b9365573170, type: 3}

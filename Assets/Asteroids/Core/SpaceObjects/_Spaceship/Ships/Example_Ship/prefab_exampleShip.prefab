@@ -636,7 +636,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9fab902bbe24eda4a8b385384e3a8f0f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  spaceObjectTag: 
   mass: 1
   thrusterForce: 7
   backwardForce: 4
@@ -649,7 +648,6 @@ MonoBehaviour:
   - _name: Shoot
     _behaviour: {fileID: 632950440051124238}
     _key: 32
-  _playerDeathParticle: {fileID: 0}
   _playerDeathSound: {fileID: 8300000, guid: a10c8a6e098617041ad5eb54ab3a2e60, type: 3}
 --- !u!114 &6980822058085015676
 MonoBehaviour:
@@ -663,23 +661,23 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dbfda3b16c8a3a845a75e1a372b90eba, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  forwardThrusters:
+  _forwardThrusters:
   - {fileID: 6980822059842743025}
   - {fileID: 6980822059314218717}
   - {fileID: 6449103605449224500}
-  forwardThrustersMaxScale: {x: 0.15, y: 0.6}
-  backwardThrusters:
+  _forwardThrustersMaxScale: {x: 0.15, y: 0.6}
+  _backwardThrusters:
   - {fileID: 6980822059182365627}
   - {fileID: 6980822059959026276}
-  backwardThrusterMaxScale: {x: 0.15, y: 0.5}
-  clockwiseThrusters:
+  _backwardThrusterMaxScale: {x: 0.15, y: 0.5}
+  _clockwiseThrusters:
   - {fileID: 6980822058095345301}
   - {fileID: 6980822059741410370}
-  clockwiseThrustersMaxScale: {x: 0.15, y: 0.4}
-  counterClockwiseThrusters:
+  _clockwiseThrustersMaxScale: {x: 0.15, y: 0.3}
+  _counterClockwiseThrusters:
   - {fileID: 6980822058242399932}
   - {fileID: 6980822058545078143}
-  counterClockwiseThrustersMaxScale: {x: 0.15, y: 0.4}
+  _counterClockwiseThrustersMaxScale: {x: 0.15, y: 0.3}
 --- !u!114 &8116002951092841102
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -692,10 +690,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a46ffcd3f14e3ce42bdf34a01e8ffba4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  trails:
+  _trails:
   - {fileID: 4431174603124448886}
-  - {fileID: 7887222219804140745}
   - {fileID: 7617519846310565662}
+  - {fileID: 7887222219804140745}
 --- !u!1 &6980822058095345300
 GameObject:
   m_ObjectHideFlags: 0
