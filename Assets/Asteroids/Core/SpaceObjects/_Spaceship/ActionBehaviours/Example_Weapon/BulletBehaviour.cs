@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System.Collections;
+using UnityEngine;
 
 namespace Arcadeum.Asteroids.Core
 {
@@ -10,12 +11,14 @@ namespace Arcadeum.Asteroids.Core
         protected override void OnEnabled()
         {
             _leftPlayer = false;
+            StartCoroutine(WaitToHit());
         }
 
-        //We have to check whether the bullet left the player, otherwise the player would self the struct while trying to shoot.
-        private void OnCollisionExit2D(Collision2D col)
+        protected IEnumerator WaitToHit()
         {
-            _leftPlayer = true; //left players body
+            yield return new WaitForSecondsRealtime(0.1f);
+            _leftPlayer = true;
         }
+
     }
 }
