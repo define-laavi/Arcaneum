@@ -31,15 +31,23 @@ namespace Arcadeum.Asteroids.Core
                 OnDeath();
 
                 if (spaceObjectBehaviour is BulletBehaviour)
-                    SoundPool.Play(_onHitLaserSound, 0.2f, 2);
+                {
+                    if (_onHitLaserSound != null)
+                    {
+                        SoundPool.Play(_onHitLaserSound, 0.2f, 2);
+                    }
+                }
 
             }
         }
         public override void OnDeath()
         {
-            var p = Pool.Spawn(_onHitParticle);
-            p.transform.position = transform.position;
-            Pool.Despawn(p, 0.7f);
+            if (_onHitParticle != null)
+            {
+                var p = Pool.Spawn(_onHitParticle);
+                p.transform.position = transform.position;
+                Pool.Despawn(p, 0.7f);
+            }
             Pool.Despawn(this.gameObject);
         }
     }

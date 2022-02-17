@@ -57,6 +57,9 @@ namespace Arcadeum.Common
 
             _instance = this;
 
+            if (_gameName == null)
+                throw new System.Exception("No game name SharedString added to Score!");
+
             LoadScoresFromPlayerPrefs();
 
             _currentScore = 0;

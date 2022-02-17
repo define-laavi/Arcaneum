@@ -70,11 +70,18 @@ namespace Arcadeum.Asteroids.Core
 
         public override void OnDeath()
         {
-            var a = Pool.Spawn(_destructionParticleSystem.gameObject);
-            a.transform.position = transform.position;
-            Pool.Despawn(a, a.GetComponent<ParticleSystem>().main.startLifetime.constantMax);
+            if (_destructionParticleSystem != null)
+            {
+                var a = Pool.Spawn(_destructionParticleSystem.gameObject);
+                a.transform.position = transform.position;
+                Pool.Despawn(a, a.GetComponent<ParticleSystem>().main.startLifetime.constantMax);
+            }
+            if (_onDeathSound != null)
+            {
+                SoundPool.Play(_onDeathSound, 0.5f);
+            }
             Pool.Despawn(gameObject);
-            SoundPool.Play(_onDeathSound, 0.5f);
+
         }
     }
 }

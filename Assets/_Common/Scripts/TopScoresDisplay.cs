@@ -37,6 +37,9 @@ namespace Arcadeum.Common
 
         private void OnEnable()
         {
+            if (_gameName == null)
+                throw new System.Exception("Game Name is not provided! Please provide Game Name!");
+
             LoadScoresFromPlayerPrefs();
             _instances.Add(this);
         }

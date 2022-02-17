@@ -40,6 +40,24 @@ namespace Arcadeum.Asteroids.Core
 
             _instance = this;
 
+            if (_spaceshipPrefab == null)
+                throw new Exception("No player prefab set!");
+
+            if (_lifeHolder == null)
+                throw new Exception("No life holder transform set!");
+
+            if (_lifeIndicator == null)
+                throw new Exception("No life indicator prefab set!");
+
+            if (_lostIndicator == null)
+                throw new Exception("No lost indicator prefab set!");
+
+            if (_gameUICanvasGroup == null)
+                throw new Exception("No game canvas group set!");
+
+            if (_gameUICanvasGroup == null)
+                throw new Exception("No gameOver canvas group set!");
+
             if (_playerDestructionBlast == null)
                 throw new Exception("No player destruction blast effect set!");
 

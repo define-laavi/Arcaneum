@@ -7,7 +7,7 @@ namespace Arcadeum.Asteroids.Core
     {
         private static World _instance;
         
-        public Camera gameCamera;
+        [SerializeField] private Camera _gameCamera;
 
         private static Vector2 _gameWorldMinimum, _gameWorldMaximum;
 
@@ -19,13 +19,13 @@ namespace Arcadeum.Asteroids.Core
             if (_instance != null)
                 Destroy(this); //More than one world can't exist at the same time.
         
-            if (gameCamera == null)
+            if (_gameCamera == null)
                 throw new System.Exception("World Camera is null. Please add the reference to the world script!");
 
             _instance = this;
 
-            _gameWorldMinimum = gameCamera.ScreenToWorldPoint(Vector2.zero);
-            _gameWorldMaximum = gameCamera.ScreenToWorldPoint(gameCamera.pixelRect.size);
+            _gameWorldMinimum = _gameCamera.ScreenToWorldPoint(Vector2.zero);
+            _gameWorldMaximum = _gameCamera.ScreenToWorldPoint(_gameCamera.pixelRect.size);
         }
 
         /// <summary>Checks whether point is inside world camera view ("playarea") </summary>
