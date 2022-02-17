@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 namespace Arcadeum.Common
 {
@@ -8,7 +6,6 @@ namespace Arcadeum.Common
     public class SharedInt : ScriptableObject
     {
         [SerializeField] private int _value;
-
         public int Value => _value;
     }
 }

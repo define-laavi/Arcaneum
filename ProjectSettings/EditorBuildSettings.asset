@@ -6,9 +6,9 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Scenes/Main Menu.unity
+    path: Assets/Main Menu.unity
     guid: d7bf130c6242b5e488ad4a3684db86b5
   - enabled: 1
-    path: Assets/Scenes/Asteroids.unity
+    path: Assets/Asteroids/Asteroids.unity
     guid: c3644e10c97a0754795be73205f515a5
   m_configObjects: {}

@@ -15,6 +15,7 @@ namespace Arcadeum.Asteroids.Core
         [Min(0.1f), SerializeField] private float _secondsToStartSpawning;
         [SerializeField] private List<Asteroid> _asteroidVariants;
 
+        /// <summary>Starts the spawner. It still has to wait for {SecondsToStartSpawning} </summary>
         public static void Run()
         {
             if (_instance == null)
@@ -22,6 +23,8 @@ namespace Arcadeum.Asteroids.Core
 
             _instance.StartCoroutine(_instance.AwaitStart());
         }
+
+        /// <summary>Stops the spawner immediately.</summary>
         public static void Stop()
         {
             if (_instance == null)
@@ -42,7 +45,6 @@ namespace Arcadeum.Asteroids.Core
 
             Run();
         }
-
         private IEnumerator AwaitStart()
         {
             yield return new WaitForSecondsRealtime(_secondsToStartSpawning);

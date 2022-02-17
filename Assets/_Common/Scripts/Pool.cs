@@ -1,36 +1,20 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 namespace Arcadeum.Common
 {
-	[System.Serializable]
-	public class ObjectPoolItem
-	{
-		public string name;
-		public GameObject objectToPool;
-		public int amountToPool;
-		public bool shouldExpand = true;
-
-		public ObjectPoolItem(GameObject obj, int amt, bool exp = true)
-		{
-			name = obj.name;
-			objectToPool = obj;
-			amountToPool = Mathf.Max(amt, 1);
-			shouldExpand = exp;
-		}
-	}
-
 	public class Pool : MonoBehaviour
 	{
 		private static Pool _instance;
-		public List<ObjectPoolItem> itemsToPool;
+		[SerializeField] private List<ObjectPoolItem> _itemsToPool;
 
 
 		private List<List<GameObject>> _pooledObjectsList;
 		private List<GameObject> _pooledObjects;
 
-		private void Awake()
+		private void Start()
 		{
 			if (_instance != null)
 				Destroy(this);
@@ -41,19 +25,20 @@ namespace Arcadeum.Common
 			_pooledObjects = new List<GameObject>();
 
 
-			for (var i = 0; i < itemsToPool.Count; i++)
+			for (var i = 0; i < _itemsToPool.Count; i++)
 			{
 				ObjectPoolItemToPooledObject(i);
 			}
 		}
 
+		/// <summary>Gets the object from the pool, and if all are being used, creates a new one</summary>
 		public static GameObject Spawn(GameObject prefab)
 		{
 			var index = _instance.PrefabToIndex(prefab);
 			if (index == -1)
 			{
-				index = _instance.itemsToPool.Count;
-				_instance.itemsToPool.Add(new ObjectPoolItem(prefab, 1, true));
+				index = _instance._itemsToPool.Count;
+				_instance._itemsToPool.Add(new ObjectPoolItem(prefab, 1, true));
 				_instance.ObjectPoolItemToPooledObject(index);
 			}
 			GameObject gameObject = _instance.GetPooledObject(index);
@@ -61,6 +46,7 @@ namespace Arcadeum.Common
 			return gameObject;
 		}
 
+		/// <summary>Turns object inactive, additionaly you can provide delay</summary>
 		public static void Despawn(GameObject gameObject, float delay = 0f)
 		{
 			if (delay <= 0)
@@ -77,16 +63,16 @@ namespace Arcadeum.Common
 			yield return new WaitForSecondsRealtime(delay);
 			gameObject.SetActive(false);
 		}
+	
 		private int PrefabToIndex(GameObject prefab)
 		{
-			for (int i = 0; i < itemsToPool.Count; i++)
+			for (int i = 0; i < _itemsToPool.Count; i++)
 			{
-				if (itemsToPool[i].objectToPool.GetHashCode() == prefab.GetHashCode())
+				if (_itemsToPool[i].PooledObject.GetHashCode() == prefab.GetHashCode())
 					return i;
 			}
 			return -1;
 		}
-
 		private GameObject GetPooledObject(int index)
 		{
 			for (int i = 0; i < _pooledObjectsList[index].Count; i++)
@@ -97,29 +83,48 @@ namespace Arcadeum.Common
 				}
 			}
 
-			if (itemsToPool[index].shouldExpand)
+			if (_itemsToPool[index].ShouldExpand)
 			{
-				var obj = Instantiate(itemsToPool[index].objectToPool, this.transform, true);
+				var obj = Instantiate(_itemsToPool[index].PooledObject, this.transform, true);
 				obj.SetActive(false);
 				_pooledObjectsList[index].Add(obj);
 				return obj;
-
 			}
 			return null;
 		}
 		private void ObjectPoolItemToPooledObject(int index)
 		{
-			ObjectPoolItem item = itemsToPool[index];
+			ObjectPoolItem item = _itemsToPool[index];
 
 			_pooledObjects = new List<GameObject>();
-			for (int i = 0; i < item.amountToPool; i++)
+			for (int i = 0; i < item.Amount; i++)
 			{
-				GameObject obj = Instantiate(item.objectToPool);
+				GameObject obj = Instantiate(item.PooledObject, this.transform);
 				obj.SetActive(false);
-				obj.transform.parent = this.transform;
 				_pooledObjects.Add(obj);
 			}
 			_pooledObjectsList.Add(_pooledObjects);
+		}
+	}
+
+	[System.Serializable]
+	public class ObjectPoolItem
+	{
+		[SerializeField, FormerlySerializedAs("name")] private string _name;
+		[SerializeField, FormerlySerializedAs("objectToPool")] private GameObject _objectToPool;
+		[SerializeField, FormerlySerializedAs("amountToPool")] private int _amountToPool;
+		[SerializeField, FormerlySerializedAs("shouldExpand")] private bool _shouldExpand = true;
+
+		public GameObject PooledObject => _objectToPool;
+		public int Amount => _amountToPool;
+		public bool ShouldExpand => _shouldExpand;
+
+		public ObjectPoolItem(GameObject obj, int amt, bool exp = true)
+		{
+			_name = obj.name;
+			_objectToPool = obj;
+			_amountToPool = Mathf.Max(amt, 1);
+			_shouldExpand = exp;
 		}
 	}
 }

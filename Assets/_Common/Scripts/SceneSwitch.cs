@@ -1,15 +1,15 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public class SceneSwitch : MonoBehaviour
 {
+    /// <summary>Quits the application</summary>
     public static void Quit()
     {
         Application.Quit();
     }
 
+    /// <summary>Loads scene based on it's name, also, replaces exception call with warning </summary>
     public static void LoadScene(string scene)
     {
         try
@@ -22,5 +22,6 @@ public class SceneSwitch : MonoBehaviour
         }
     }
 
+    /// <summary>Helper that loads the provided scene</summary>
     public static void LoadScene(Scene scene) => LoadScene(scene.name);
 }

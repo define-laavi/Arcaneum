@@ -15,6 +15,7 @@ namespace Arcadeum.Asteroids.Core
         [Header("General")]
         [SerializeField, Min(1)] private int _maxLives;
         [SerializeField] private Spaceship _spaceshipPrefab;
+        [SerializeField] private SharedInt _asteroidValueReference;
 
         [Header("Life Display")]
         [SerializeField] private Transform _lifeHolder;
@@ -48,6 +49,26 @@ namespace Arcadeum.Asteroids.Core
             SpawnShip();
         }
 
+        /// <summary>Tells the game that player has died </summary>
+        /// <param name="lastPlayerPosition">Last known player position - is used for the blast effect</param>
+        public static void OnPlayerDeath(Vector2 lastPlayerPosition)
+        {
+            if (_instance == null)
+                throw new Exception("There is no gameplay script instance");
+
+            _instance._lives -= 1;
+            _instance.UpdateLives();
+
+            if (_instance._lives > 0)
+            {
+                _instance.StartCoroutine(RestartGame(lastPlayerPosition));
+            }
+            else
+            {
+                _instance.StartCoroutine(GameOver(lastPlayerPosition));
+            }
+        }
+
         private void UpdateLives()
         {
             foreach (Transform t in _lifeHolder)
@@ -67,25 +88,6 @@ namespace Arcadeum.Asteroids.Core
                 }
             }
         }
-
-        public static void OnPlayerDeath(Vector2 lastPlayerPosition)
-        {
-            if (_instance == null)
-                throw new Exception("There is no gameplay script instance");
-
-            _instance._lives -= 1;
-            _instance.UpdateLives();
-
-            if (_instance._lives > 0)
-            {
-                _instance.StartCoroutine(RestartGame(lastPlayerPosition));
-            }
-            else
-            {
-                _instance.StartCoroutine(GameOver(lastPlayerPosition));
-            }
-        }
-
         private static IEnumerator GameOver(Vector2 lastPlayerPosition)
         {
             //Disable spawning
@@ -124,7 +126,6 @@ namespace Arcadeum.Asteroids.Core
             //Enable spawning again
             SimpleAsteroidSpawner.Run();
         }
-
         private static IEnumerator Blast(Vector2 lastPlayerPosition)
         {
             const float radiOfBlast = 50f; // | For the best effect values on the player destruction particle system should be the same (startLifetime and startSize)

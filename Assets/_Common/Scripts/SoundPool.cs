@@ -15,35 +15,15 @@ namespace Arcadeum.Common
                 Destroy(this);
 
             _instance = this;
+
             foreach (var soundClip in _sounds)
             {
                 soundClip.source = gameObject.AddComponent<AudioSource>();
                 soundClip.source.clip = soundClip.clip;
             }
         }
-        
-        public static void ChangeVolumeAndPitch(AudioClip clip, float volume = 0.2f, float pitch = 1, bool loops = true)
-        {
-            if (_instance == null)
-                throw new System.Exception("There is no SoundPool added to the scene!");
 
-            var soundClip = _instance._sounds.FirstOrDefault(aclip => aclip.clip == clip);
-            var source = default(AudioSource);
-            if (soundClip != null)
-            {
-                source = soundClip.source;
-            }
-            else
-            {
-                source = _instance.AddSoundClip(clip).source;
-            }
-
-            source.volume = volume;
-            source.pitch = pitch;
-            source.loop = loops;
-        }
-
-
+        /// <summary> Plays provided audio clip on a generated audioSource </summary>
         public static void Play(AudioClip clip, float volume = 0.2f, float pitch = 1)
         {
             if (_instance == null)

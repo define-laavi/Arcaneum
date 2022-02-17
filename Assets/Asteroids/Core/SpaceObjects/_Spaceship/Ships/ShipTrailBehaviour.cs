@@ -1,14 +1,16 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 namespace Arcadeum.Asteroids.Core
 {
     public class ShipTrailBehaviour : MonoBehaviour
     {
-        public List<TrailRenderer> trails;
+        [SerializeField] private List<TrailRenderer> _trails;
 
         private bool _lastEmit;
 
+        /// <summary>Updates the emission state based on the position of spaceship - disables if it is outside of the play area to avoid visual glitches</summary>
         public void UpdateTrails(Vector2 position)
         {
             bool emits = World.IsInPlayArea(position);
@@ -23,13 +25,12 @@ namespace Arcadeum.Asteroids.Core
                 _lastEmit= false;
             }
         }
-
         private void SetEmission(bool emits)
         {
             TrailRenderer trail;
-            for (int i = trails.Count - 1; i >= 0; i--)
+            for (int i = _trails.Count - 1; i >= 0; i--)
             {
-                trail = trails[i];
+                trail = _trails[i];
                 trail.emitting = emits;
                 if (!emits) trail.Clear();
             }

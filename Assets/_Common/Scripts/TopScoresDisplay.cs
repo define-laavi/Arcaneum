@@ -9,7 +9,7 @@ namespace Arcadeum.Common
     {
         private static List<TopScoresDisplay> _instances = new List<TopScoresDisplay>();
 
-        [SerializeField, FormerlySerializedAs("gameName")] private SharedString _gameName;
+        [SerializeField] private SharedString _gameName;
         [SerializeField] private List<TextMeshProUGUI> _texts;
 
         /// <summary>Refresh current top scores display by loading new ones from player prefs</summary>

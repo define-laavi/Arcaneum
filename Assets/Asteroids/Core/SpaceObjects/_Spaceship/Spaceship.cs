@@ -102,7 +102,7 @@ namespace Arcadeum.Asteroids.Core
             var inputSpeed = _input.y * (_input.y > 0 ? thrusterForce : backwardForce) / mass;
             var acceleration = transform.up * inputSpeed;
 
-            ApplyLinearForce(acceleration);
+            ApplyLinearImpulse(acceleration);
 
             _position = transform.position + _speed * Time.deltaTime;
         }
@@ -141,11 +141,9 @@ namespace Arcadeum.Asteroids.Core
             base.OnDeath();
         }
 
-        /// <summary>
-        /// Applies linear force to spaceship
-        /// </summary>
-        /// <param name="impulse">Bear in mind that this works for one frame so the forc that </param>
-        public void ApplyLinearForce(Vector2 impulse)
+        /// <summary> Applies linear impulse to spaceship </summary>
+        /// <param name="impulse">Bear in mind that this works for one frame so the force must be big to take some effect</param>
+        public void ApplyLinearImpulse(Vector2 impulse)
         {
             _speed += (Vector3)impulse / mass * Time.deltaTime;
 

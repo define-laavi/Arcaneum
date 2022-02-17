@@ -12,6 +12,11 @@ namespace Arcadeum.Asteroids.Core
         [SerializeField] private float recoil = 0.2f;
         private bool _canShoot = true;
 
+        public void OnEnable()
+        {
+            _canShoot = true;
+        }
+
         public override void Act(Spaceship spaceship)
         {
             if (!_canShoot) return;
@@ -23,7 +28,7 @@ namespace Arcadeum.Asteroids.Core
             if(bulletShootClip != null)
                 SoundPool.Play(bulletShootClip);
 
-            spaceship.ApplyLinearForce(-transform.up * recoil); //Apply recoil
+            spaceship.ApplyLinearImpulse(-transform.up * recoil); //Apply recoil
 
             StartCoroutine(Reload());
         }

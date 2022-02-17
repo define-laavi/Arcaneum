@@ -12,6 +12,7 @@ namespace Arcadeum.Asteroids.Core
             _leftPlayer = false;
         }
 
+        //We have to check whether the bullet left the player, otherwise the player would self the struct while trying to shoot.
         private void OnCollisionExit2D(Collision2D col)
         {
             _leftPlayer = true; //left players body

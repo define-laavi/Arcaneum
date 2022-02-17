@@ -7,17 +7,18 @@ namespace Arcadeum.Asteroids.Core
     public class Asteroid : SpaceObjectBehaviour
     {
         [Header("General")]
-        public SharedInt pointsOnBulletHit;
+        [SerializeField] private SharedInt _pointsOnBulletHit;
 
         [Header("Movement")]
-        public float minSpeed;
-        public float maxSpeed;
-        public float minRotationSpeed, maxRotationSpeed;
+        [SerializeField] private float _minSpeed;
+        [SerializeField] private float _maxSpeed;
+        [SerializeField] private float _minRotationSpeed;
+        [SerializeField] private float _maxRotationSpeed;
 
         [Header("Split")]
-        public List<Asteroid> asteroidPrefabsToSpawn;
-        public int numberOfAsteroidsToSpawn;
-        public ParticleSystem destructionParticleSystem;
+        [SerializeField] private List<Asteroid> _asteroidPrefabsToSpawn;
+        [SerializeField] private int _numberOfAsteroidsToSpawn;
+        [SerializeField] private ParticleSystem _destructionParticleSystem;
         [SerializeField] private AudioClip _onDeathSound;
 
         private Vector2 _direction;
@@ -29,8 +30,8 @@ namespace Arcadeum.Asteroids.Core
         {
             _wasInGameArea = false;
             _direction = (World.GetRandomVectorInPlayArea() - (Vector2)transform.position).normalized; //GetRandomPositionInsidePlayArea
-            _speed = Random.Range(minSpeed, maxSpeed);
-            _rotationSpeed = Random.Range(minRotationSpeed, maxRotationSpeed);
+            _speed = Random.Range(_minSpeed, _maxSpeed);
+            _rotationSpeed = Random.Range(_minRotationSpeed, _maxRotationSpeed);
         }
 
         protected override void OnUpdate()
@@ -53,23 +54,23 @@ namespace Arcadeum.Asteroids.Core
             {
                 Split();
                 OnDeath();
-                Score.AddScore(pointsOnBulletHit.Value);
+                Score.AddScore(_pointsOnBulletHit.Value);
             }
         }
         private void Split()
         {
-            if (asteroidPrefabsToSpawn.Count == 0 || numberOfAsteroidsToSpawn <= 0) return;
+            if (_asteroidPrefabsToSpawn.Count == 0 || _numberOfAsteroidsToSpawn <= 0) return;
 
-            for (var i = 0; i < numberOfAsteroidsToSpawn; i++)
+            for (var i = 0; i < _numberOfAsteroidsToSpawn; i++)
             {
-                var asteroid = Pool.Spawn(asteroidPrefabsToSpawn[Random.Range(0, asteroidPrefabsToSpawn.Count)].gameObject);
+                var asteroid = Pool.Spawn(_asteroidPrefabsToSpawn[Random.Range(0, _asteroidPrefabsToSpawn.Count)].gameObject);
                 asteroid.transform.position = transform.position;
             }
         }
 
         public override void OnDeath()
         {
-            var a = Pool.Spawn(destructionParticleSystem.gameObject);
+            var a = Pool.Spawn(_destructionParticleSystem.gameObject);
             a.transform.position = transform.position;
             Pool.Despawn(a, a.GetComponent<ParticleSystem>().main.startLifetime.constantMax);
             Pool.Despawn(gameObject);
