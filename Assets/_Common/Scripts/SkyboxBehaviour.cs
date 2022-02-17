@@ -14,6 +14,6 @@ public class SkyboxBehaviour : MonoBehaviour
     void Update()
     {
         currentRot = (currentRot + _speed * Time.deltaTime) % 360;
-        _material.SetFloat(Rotation, currentRot);
+        _material?.SetFloat(Rotation, currentRot);
     }
 }
